@@ -28,7 +28,7 @@
     "last_opened_file_path": "E:/Шавуха/Информатика/Infa_labs_1_semester"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.infa_lab_3_v-17">
+  <component name="RunManager" selected="Python.main">
     <configuration name="infa_lab_3_v-17" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Infa_labs_1_semester" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -73,8 +73,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.infa_lab_3_v-17" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.infa_lab_3_v-17" />
       </list>
     </recent_temporary>
   </component>
