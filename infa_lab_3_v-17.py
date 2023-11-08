@@ -8,10 +8,11 @@ alf_consonants_en = 'BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz'
 alf_consonants_ru = 'БВГДЖЗЙКЛМНПРСТФХЦЧШЩбвгджзйклмнпрстфхцчшщ'
 answer = ''
 
-for r in range(len(string)): #если мы считаем таб за 4 пробела, а не за отдельный символ
-    if string[r]!= '\t' and string[r][0] == '\t':
-        string[r] = string[r][1::]
-        print(string[r][0])
+for r in range(len(string)): #если мы считаем таб в начале за 4 пробела, а не за отдельный символ
+    if string[r]!= '\t':
+        if string[r][0] == '\t':
+            string[r] = string[r][1::]
+            print(r,string[r][0])
 
 for i in range(len(string)):
     if string[i]!= '' and string[i]!= '\t':
