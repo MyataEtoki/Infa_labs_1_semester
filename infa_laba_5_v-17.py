@@ -33,19 +33,14 @@ A2 = [[-2,3,0],
 B2 = [[-1,2],
       [0,-3],
       [2,1]]
-p=len(A2)
-def product_AB(a,b):
-    E = [[0] * len(A2) for i in range(p)]
-    for m in range(len(A2)):
-        for n in range(len(A2[m])):
-            for t in range(len(A2[m])):
-                print(m,E)
-                E[m][n] += A2[m][n+t]*B2[n+t][m]
 
+def product_AB(a,b):
+    E = [[0] * len(A2) for r in range(len(A2))]
+    for m in range(len(A2)):
+        for n in range(len(b[0])):
+            E[m][n] = sum(A2[m][t]*B2[t][n] for t in range(len(b)))
     return E
 
-'''
 print(sum_AB(A,B))
 print(difference_AB(A,B))
-'''
 print(product_AB(A2,B2))
