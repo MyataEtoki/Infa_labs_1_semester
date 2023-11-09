@@ -8,7 +8,7 @@ alf_consonants_en = 'BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz'
 alf_consonants_ru = 'БВГДЖЗЙКЛМНПРСТФХЦЧШЩбвгджзйклмнпрстфхцчшщ'
 answer = ''
 
-for r in range(len(string)): #если мы считаем таб в начале за 4 пробела, а не за отдельный символ
+for r in range(len(string)): #если мы считаем таб в начале(таб в середине!=пробелы) за 4 пробела, а не за отдельный символ
     if string[r]!= '\t':
         if string[r][0] == '\t':
             string[r] = string[r][1::]
