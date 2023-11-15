@@ -1,6 +1,6 @@
 # доп - Ввести строку и образец,
 # вывести на экран только слова
-# начинающиеся и заканчивающиеся с заданного образца
+# начинающиеся с заданного образца
 string = input('Введите слова через пробел: ')
 sample = input('Введите образец: ')
 string = string.split(' ')
@@ -24,6 +24,6 @@ print('Слова начинающиеся с согласной:',answer)
 sample_answer = ''
 for k in range(len(string)):
     if string[k] != '' and string[k] != '\t':
-        if string[k][0:len(sample)] == sample:
+        if string[k][0:len(sample)] == sample: #забыл проверку на заканчивание образцом - string[k][-1:len(sample)[0:-1:]] == sample
             sample_answer += string[k] + ' '
 print('Слова начинающиеся с образца:', sample_answer)
