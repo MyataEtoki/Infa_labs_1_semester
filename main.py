@@ -5,7 +5,7 @@
 from least_common_multiple import l_c_m, g_c_d
 #number1, number2 = abs(int(input('Введите 1 число:'))), abs(int(input('Введите 2 число:')))
 #print(l_c_m(number1,number2))
-numbers = [int(x) for x in input('Введите числа через пробел:').split()]
+numbers = [abs(int(x)) for x in input('Введите числа через пробел:').split()]
 gcds = [0] * (len(numbers))
 gcds[0] = numbers[0]
 lcms = [0]*(len(numbers))
