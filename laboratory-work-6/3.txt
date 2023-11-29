@@ -1,0 +1,4 @@
+string 2 - old: 098765 // new: 34053479 
+string 4 - old: 0987 // new: 0773 
+string 6 - old: khgjf // new: khgjf9 
+string 16 - old: None // new: jjjjj 
