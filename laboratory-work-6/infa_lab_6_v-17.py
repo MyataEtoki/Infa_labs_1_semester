@@ -15,13 +15,14 @@ min_len = min(len(strings1), len(strings2))
 max_len = max(len(strings1), len(strings2))
 for i in range(min_len):
     if strings1[i] != strings2[i]:
-        file3.write(f'string {i} - 1 file: {strings1[i]} // 2 file: {strings2[i]} \n')
-if len(strings2)>len(strings1):
+        file3.write(f'string {i+1} - 1 file: {strings1[i]} // 2 file: {strings2[i]} \n')
+        # i+1 ради смотрибельности, т.к тект.ред. считает с 1, а не с 0
+if len(strings2) > len(strings1):
     for i in range(min_len, max_len):
-        file3.write(f'string {min_len + i} - 1 file: None // 2 file: {strings2[i]} \n')
+        file3.write(f'string {i+1} - 1 file: None // 2 file: {strings2[i]} \n')
 else:
     for i in range(min_len, max_len):
-        file3.write(f'string {min_len + i} - 1 file: {strings1[i]} // 2 file: None \n')
+        file3.write(f'string {i+1} - 1 file: {strings1[i]} // 2 file: None \n')
 
 file1.close()
 file2.close()
