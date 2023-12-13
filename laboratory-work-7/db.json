@@ -5,9 +5,9 @@
     {
       "id": 1,
       "name": "Иванов Иван",
-      "age": 15,
+      "age": 21,
       "contacts": {
-        "email": "ivanov@@gear.metal",
+        "email": "ivanov@gear.metal",
         "phone": "+1234567890"
       },
       "districts_id": 1,
@@ -18,14 +18,17 @@
       "chats_id": [
         1,
         3
+      ],
+      "groups_id" : [
+        1
       ]
     },
     {
       "id": 2,
-      "name": "Петрова Анна",
-      "age": 16,
+      "name": "Зукерберг Марат",
+      "age": 46,
       "contacts": {
-        "email": "annapetrova@@gear.metal",
+        "email": "Zuckerberg@gear.metal",
         "phone": "+0987654321"
       },
       "districts_id": 3,
@@ -35,6 +38,9 @@
       "chats_id": [
         1,
         3
+      ],
+      "groups_id" : [
+        3
       ]
     },
     {
@@ -42,7 +48,7 @@
       "name": "Кострецов Миша",
       "age": 23,
       "contacts": {
-        "email": "MishaKoster@@gear.metal",
+        "email": "MishaKoster@gear.metal",
         "phone": "+5678901234"
       },
       "districts_id": 1,
@@ -53,14 +59,18 @@
       "chats_id": [
         1,
         2
+      ],
+      "groups_id" : [
+        1,
+        2
       ]
     },
     {
       "id": 4,
-      "name": "Костюшкин Стас",
-      "age": 55,
+      "name": "Егор Летов",
+      "age": 43,
       "contacts": {
-        "email": "Staaaas@gear.metal",
+        "email": "egorka@gear.metal",
         "phone": "+5678901234"
       },
       "districts_id": 2,
@@ -68,6 +78,9 @@
         3
       ],
       "chats_id": [
+        2
+      ],
+      "groups_id" : [
         2
       ]
     }
@@ -83,7 +96,7 @@
     },
     {
       "id": 2,
-      "name": "Готы",
+      "name": "Панки",
       "users_id": [
         3,
         4
@@ -101,9 +114,9 @@
     {
       "id": 1,
       "name": "Московский",
-      "groups_id": [
+      "users_id": [
         1,
-        2
+        3
       ],
       "objects": {
         "school": "Школа №77 им.Смирновой",
@@ -115,8 +128,8 @@
     {
       "id": 2,
       "name": "Ольговещанский",
-      "groups_id": [
-        3
+      "users_id": [
+        4
       ],
       "objects": {
         "school": "Школа №74",
@@ -128,8 +141,8 @@
     {
       "id": 3,
       "name": "Мытищи",
-      "groups_id": [
-        1
+      "users_id": [
+        2
       ],
       "objects": {
         "school": "Школа №2 им.Комаровой",
