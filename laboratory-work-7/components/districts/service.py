@@ -25,7 +25,6 @@ def update_one_by_id(id, district):
 
             elem["name"] = district["name"]
             elem["users_id"] = district["users_id"]
-            
 
             json_service.set_database(db)
             return elem

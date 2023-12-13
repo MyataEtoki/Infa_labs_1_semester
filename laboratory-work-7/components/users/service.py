@@ -25,6 +25,10 @@ def update_one_by_id(id, user):
 
             elem["name"] = user["name"] # изменяем параметры на введённые
             elem["contacts"] = user["contacts"]
+            elem["districts_id"] = user["districts_id"]
+            elem["friends_users_id"] = user["friends_users_id"]
+            elem["chats_id"] = user["chats_id"]
+            elem["groups_id"] = user["groups_id"]
 
             json_service.set_database(db)
             return elem
