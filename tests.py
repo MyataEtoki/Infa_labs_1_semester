@@ -1,27 +1,18 @@
-print(54%24)
+def decimal_to_octal_negative(decimal):
 
+    # Переводим отрицательное число в дополнительный код
+    complement = bin(decimal & 0xffffffff)[2:]
+    print(complement)
+    # Добавляем нули в начало до достижения длины кратной 3
+    complement = complement.zfill((len(complement) + 2) // 3 * 3)
+    print(complement)
+    # Группируем биты по три и переводим их в восьмеричную систему
+    octal_digits = [complement[i:i+3] for i in range(0, len(complement), 3)]
+    octal = ''.join(str(int(group, 2)) for group in octal_digits)
+    print(octal_digits)
+    return octal
 
-
-
-
-'''def find_div(n):
-    a = []
-    for j in range(1, int(n ** 0.5) + 1):
-        if (n % j == 0):
-            a.append(j)
-            if (j != n // j):
-                a.append(n // j)
-    a.sort()
-    return a
-
-number1, number2 = int(input()), int(input())
-if number1 < number2:  # а что если они равны?
-    div1, div2 = find_div(number2), find_div(number1)
-else:
-    div1, div2 = find_div(number1), find_div(number2)
-
-divs = []
-for i in range(len(div1)):
-    if div1[i] in div2:
-        divs.append()
-'''
+# Пример использования
+negative_decimal = -23
+octal_representation = decimal_to_octal_negative(negative_decimal)
+print(f"Отрицательное число {negative_decimal} в восьмеричной системе: {octal_representation}")

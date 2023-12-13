@@ -1,4 +1,6 @@
-string 2 - old: 098765 // new: 34053479 
-string 4 - old: 0987 // new: 0773 
-string 6 - old: khgjf // new: khgjf9 
-string 16 - old: None // new: jjjjj 
+string 1 - 1 file: 1 файл // 2 file: 2 файл 
+string 5 - 1 file: sdfsdfsdgg // 2 file: oifygskdf 
+string 10 - 1 file: 523 // 2 file: fff56 
+string 12 - 1 file: 45 // 2 file: 456 
+string 14 - 1 file: 13(тпр14)string // 2 file: None 
+string 15 - 1 file: русский не я // 2 file: None 
