@@ -1,27 +1,32 @@
-import components.teachers.service as teacher
-#Нужно взаимодействовать с несколькими сущностями сразу.
+import components.users.service as user
 
-# print(teacher.create_one({
-#       "name": "Тест Тест",
-#       "courses_id": [
+# Нужно взаимодействовать с несколькими сущностями сразу.
+
+
+
+# print(user.create_one({
+#     "name": "Тест Тест",
+#     "contacts": {
+#         "email": "тест@example.com",
+#         "phone": "+333333"
+#     },
+#     "chats_id": [
 #           1,
 #           2
-#       ],
-#       "contacts": {
-#           "email": "тест@example.com",
-#           "phone": "+333333"
-#       }}))
+#       ]
+# }))
 
 
-print(teacher.delete_one_by_id(4))
+# print(user.delete_one_by_id(5))
 
-# print(teacher.get_all())
+# print(user.get_all())
 
-# print(teacher.get_one_by_id(1))
+# print(user.get_one_by_id(1))
 
-# print(teacher.update_one_by_id(4, {
+# print(user.update_one_by_id(4, {
 #       "name": "Не Смирнова Екатерина",
 #       "contacts": {
 #           "email": "нет@example.com",
 #           "phone": "+1122334455"
 #       }}))
+

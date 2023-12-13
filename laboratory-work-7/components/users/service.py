@@ -20,10 +20,10 @@ def get_all():
 def update_one_by_id(id, user):
     db = json_service.get_database()
 
-    for i, elem in enumerate(db["users"]): #пронумировал юзеров (нумер, значение)
-        if elem["id"] == id: #ищем нужного юзера
+    for i, elem in enumerate(db["users"]): # пронумировал юзеров (нумер, значение)
+        if elem["id"] == id: # ищем нужного юзера
 
-            elem["name"] = user["name"]
+            elem["name"] = user["name"] # изменяем параметры на введённые
             elem["contacts"] = user["contacts"]
 
             json_service.set_database(db)
@@ -38,7 +38,7 @@ def delete_one_by_id(id):
     for i, elem in enumerate(db["users"]):
         if elem["id"] == id:
 
-            candidate = db["users"].pop(i) #удаляет из массива элемент по(индексу)
+            candidate = db["users"].pop(i) # удаляет из массива элемент по(индексу)
             json_service.set_database(db)
 
             return candidate
@@ -49,7 +49,7 @@ def delete_one_by_id(id):
 def create_one(user):
     db = json_service.get_database()
 
-    last_user_id = get_all()[-1]["id"] #значение последнего существующего айди
-    db["users"].append({"id": last_user_id + 1, **user}) #добавляем его в конец
+    last_user_id = get_all()[-1]["id"] # значение последнего существующего айди
+    db["users"].append({"id": last_user_id + 1, **user}) # добавляем его в конец
 
     json_service.set_database(db)

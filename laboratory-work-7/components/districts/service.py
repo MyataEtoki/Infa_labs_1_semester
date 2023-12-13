@@ -4,7 +4,7 @@ import utils.json_service as json_service
 def get_one_by_id(id):
     db = json_service.get_database()
 
-    for elem in db["teachers"]:
+    for elem in db["districts"]:
         if elem["id"] == id:
             return elem
 
@@ -14,17 +14,18 @@ def get_one_by_id(id):
 def get_all():
     db = json_service.get_database()
 
-    return db["teachers"]
+    return db["districts"]
 
 
-def update_one_by_id(id, teacher):
+def update_one_by_id(id, district):
     db = json_service.get_database()
 
-    for i, elem in enumerate(db["teachers"]):
+    for i, elem in enumerate(db["districts"]):
         if elem["id"] == id:
 
-            elem["name"] = teacher["name"]
-            elem["contacts"] = teacher["contacts"]
+            elem["name"] = district["name"]
+            elem["users_id"] = district["users_id"]
+            
 
             json_service.set_database(db)
             return elem
@@ -35,10 +36,10 @@ def update_one_by_id(id, teacher):
 def delete_one_by_id(id):
     db = json_service.get_database()
 
-    for i, elem in enumerate(db["teachers"]):
+    for i, elem in enumerate(db["districts"]):
         if elem["id"] == id:
 
-            candidate = db["teachers"].pop(i)
+            candidate = db["districts"].pop(i)
             json_service.set_database(db)
 
             return candidate
@@ -46,10 +47,10 @@ def delete_one_by_id(id):
     return {"message": f"Элемент с {id} не найден"}
 
 
-def create_one(teacher):
+def create_one(district):
     db = json_service.get_database()
 
-    last_teacher_id = get_all()[-1]["id"]
-    db["teachers"].append({"id": last_teacher_id + 1, **teacher})
+    last_district_id = get_all()[-1]["id"]
+    db["districts"].append({"id": last_district_id + 1, **district})
 
     json_service.set_database(db)

@@ -24,7 +24,7 @@ def update_one_by_id(id, chat):
         if elem["id"] == id:
 
             elem["name"] = chat["name"]
-            elem["contacts"] = chat["contacts"]
+            elem["users_id"] = chat["users_id"]
 
             json_service.set_database(db)
             return elem
