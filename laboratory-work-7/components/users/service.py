@@ -1,14 +1,14 @@
 import utils.json_service as json_service
 
 
-def get_one_by_id(id):
+def get_one_by_id(user_id):
     db = json_service.get_database()
 
     for elem in db["users"]:
-        if elem["id"] == id:
+        if elem["id"] == user_id:
             return elem
 
-    return {"message": f"Элемент с {id} не найден"}
+    return {"message": f"Элемент с {user_id} не найден"}
 
 
 def get_all():
@@ -17,11 +17,11 @@ def get_all():
     return db["users"]
 
 
-def update_one_by_id(id, user):
+def update_one_by_id(user_id, user):
     db = json_service.get_database()
 
     for i, elem in enumerate(db["users"]): # пронумировал юзеров (нумер, значение)
-        if elem["id"] == id: # ищем нужного юзера
+        if elem["id"] == user_id: # ищем нужного юзера
 
             elem["name"] = user["name"] # изменяем параметры на введённые
             elem["contacts"] = user["contacts"]
@@ -33,21 +33,21 @@ def update_one_by_id(id, user):
             json_service.set_database(db)
             return elem
 
-    return {"message": f"Элемент с {id} не найден"}
+    return {"message": f"Элемент с {user_id} не найден"}
 
 
-def delete_one_by_id(id):
+def delete_one_by_id(user_id):
     db = json_service.get_database()
 
     for i, elem in enumerate(db["users"]):
-        if elem["id"] == id:
+        if elem["id"] == user_id:
 
             candidate = db["users"].pop(i) # удаляет из массива элемент по(индексу)
             json_service.set_database(db)
 
             return candidate
 
-    return {"message": f"Элемент с {id} не найден"}
+    return {"message": f"Элемент с {user_id} не найден"}
 
 
 def create_one(user):

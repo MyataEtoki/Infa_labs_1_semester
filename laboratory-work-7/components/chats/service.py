@@ -1,14 +1,14 @@
 import utils.json_service as json_service
 
 
-def get_one_by_id(id):
+def get_one_by_id(chat_id):
     db = json_service.get_database()
 
     for elem in db["chats"]:
-        if elem["id"] == id:
+        if elem["id"] == chat_id:
             return elem
 
-    return {"message": f"Элемент с {id} не найден"}
+    return {"message": f"Элемент с {chat_id} не найден"}
 
 
 def get_all():
@@ -17,11 +17,11 @@ def get_all():
     return db["chats"]
 
 
-def update_one_by_id(id, chat):
+def update_one_by_id(chat_id, chat):
     db = json_service.get_database()
 
     for i, elem in enumerate(db["chats"]):
-        if elem["id"] == id:
+        if elem["id"] == chat_id:
 
             elem["name"] = chat["name"]
             elem["users_id"] = chat["users_id"]
@@ -29,21 +29,21 @@ def update_one_by_id(id, chat):
             json_service.set_database(db)
             return elem
 
-    return {"message": f"Элемент с {id} не найден"}
+    return {"message": f"Элемент с {chat_id} не найден"}
 
 
-def delete_one_by_id(id):
+def delete_one_by_id(chat_id):
     db = json_service.get_database()
 
     for i, elem in enumerate(db["chats"]):
-        if elem["id"] == id:
+        if elem["id"] == chat_id:
 
             candidate = db["chats"].pop(i)
             json_service.set_database(db)
 
             return candidate
 
-    return {"message": f"Элемент с {id} не найден"}
+    return {"message": f"Элемент с {chat_id} не найден"}
 
 
 def create_one(chat):

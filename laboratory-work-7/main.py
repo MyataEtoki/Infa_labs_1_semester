@@ -2,12 +2,12 @@ import components.users.service as user
 import components.groups.service as group
 import components.chats.service as chat
 import components.districts.service as districts  # без s не работает (???)
-
+import utils.json_service as json_service
 
 # Нужно взаимодействовать с несколькими сущностями сразу.
 
 def menu():
-    operation = input('Выберите операцию: create, update, delete, read\n')
+    operation = input('Выберите операцию: create, update, read, delete\n')
     match operation:
         case 'create':
             object = input('Выберите объект: user, chat, group, district\n')
@@ -16,19 +16,20 @@ def menu():
                     name = input('Имя:\n')
                     email = input('Email:\n')
                     phone = input('Телефон:\n')
-                    chats = input('Id чатов в которых состоит через пробел:\n').split()
-                    groups = input('Id групп, в которых состоит через пробел:\n').split()
+                    chats = input('Id чатов в которых состоит, через пробел:\n').split()
+                    groups = input('Id групп, в которых состоит, через пробел:\n').split()
                     district = int(input('Id района:\n'))
                     friends = input('Id друзей через пробел: \n').split()
                     new_user = {"name": name, "contacts": {"email": email,
                                                            "phone": phone}, "chats_id": chats, "districts_id": district,
                                 "friends_users_id": friends, "groups": groups}
                     user.create_one(new_user)
+                    print(new_user)
                 case 'group':
                     name = input('Название:\n')
                     users_id = input('Id пользователей через пробел: \n').split()
                     new = {"name": name, "users_id": users_id}
-                    group.create_one(new)
+                    print(group.create_one(new))
                 case 'district':
                     name = input('Название:\n')
                     users_id = input('Id пользователей через пробел: \n').split()
@@ -47,8 +48,8 @@ def menu():
                     name = input('Имя:\n')
                     email = input('Email:\n')
                     phone = input('Телефон:\n')
-                    chats = input('Id чатов в которых состоит через пробел:\n').split()
-                    groups = input('Id групп, в которых состоит через пробел:\n').split()
+                    chats = input('Id чатов в которых состоит, через пробел:\n').split()
+                    groups = input('Id групп, в которых состоит, через пробел:\n').split()
                     district = int(input('Id района:\n'))
                     friends = input('Id друзей через пробел: \n').split()
                     new = {"name": name, "contacts": {"email": email, "phone": phone}, "chats_id": chats,
@@ -74,19 +75,19 @@ def menu():
             who_id = int(input('Введите id объекта:\n'))
             match object:
                 case 'user':
-                    user.get_one_by_id(who_id)
+                    print(user.get_one_by_id(who_id))
                 case 'chat':
-                    chat.get_one_by_id(who_id)
+                    print(chat.get_one_by_id(who_id))
                 case 'group':
-                    group.get_one_by_id(who_id)
+                    print(group.get_one_by_id(who_id))
                 case 'district':
-                    districts.get_one_by_id(who_id)
+                    print(districts.get_one_by_id(who_id))
         case 'delete':
             object = input('Выберите объект: user, chat, group, district\n')
             match object:
                 case 'user':
                     who_id = int(input('id удаляемого объекта:\n'))
-                    user.delete_one_by_id(who_id)
+                    print(user.delete_one_by_id(who_id))
                 case 'chat':
                     who_id = int(input('id удаляемого объекта:\n'))
                     chat.delete_one_by_id(who_id)
@@ -97,7 +98,7 @@ def menu():
                     who_id = int(input('id удаляемого объекта:\n'))
                     districts.delete_one_by_id(who_id)
 
-print(user.get_one_by_id(2))
+
 print(menu())
 # print(user.create_one({
 #     "name": "Тест Тест",
