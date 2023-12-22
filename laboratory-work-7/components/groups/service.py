@@ -22,9 +22,14 @@ def update_one_by_id(group_id, group):
 
     for i, elem in enumerate(db["groups"]):
         if elem["id"] == group_id:
-
-            elem["name"] = group["name"]
-            elem["users_id"] = group["users_id"]
+            try:
+                elem["name"] = group["name"]
+            except KeyError:
+                pass
+            try:
+                elem["users_id"] = group["users_id"]
+            except KeyError:
+                pass
 
             json_service.set_database(db)
             return elem

@@ -22,13 +22,31 @@ def update_one_by_id(user_id, user):
 
     for i, elem in enumerate(db["users"]): # пронумировал юзеров (нумер, значение)
         if elem["id"] == user_id: # ищем нужного юзера
-
-            elem["name"] = user["name"] # изменяем параметры на введённые
-            elem["contacts"] = user["contacts"]
-            elem["districts_id"] = user["districts_id"]
-            elem["friends_users_id"] = user["friends_users_id"]
-            elem["chats_id"] = user["chats_id"]
-            elem["groups_id"] = user["groups_id"]
+            # изменяем параметры на введённые
+            try:
+                elem["name"] = user["name"]
+            except KeyError:
+                pass
+            try:
+                elem["contacts"] = user["contacts"]
+            except KeyError:
+                pass
+            try:
+                elem["districts_id"] = user["districts_id"]
+            except KeyError:
+                pass
+            try:
+                elem["friends_users_id"] = user["friends_users_id"]
+            except KeyError:
+                pass
+            try:
+                elem["chats_id"] = user["chats_id"]
+            except KeyError:
+                pass
+            try:
+                elem["groups_id"] = user["groups_id"]
+            except  KeyError:
+                pass
 
             json_service.set_database(db)
             return elem
@@ -49,6 +67,10 @@ def delete_one_by_id(user_id):
 
     return {"message": f"Элемент с {user_id} не найден"}
 
+def found_id(name):
+    for i in get_all():
+        if i["name"] == name:
+            return i["id"]
 
 def create_one(user):
     db = json_service.get_database()
@@ -57,3 +79,6 @@ def create_one(user):
     db["users"].append({"id": last_user_id + 1, **user}) # добавляем его в конец
 
     json_service.set_database(db)
+
+
+

@@ -22,9 +22,14 @@ def update_one_by_id(district_id, district):
 
     for i, elem in enumerate(db["districts"]):
         if elem["id"] == district_id:
-
-            elem["name"] = district["name"]
-            elem["users_id"] = district["users_id"]
+            try:
+                elem["name"] = district["name"]
+            except KeyError:
+                pass
+            try:
+                elem["users_id"] = district["users_id"]
+            except KeyError:
+                pass
 
             json_service.set_database(db)
             return elem

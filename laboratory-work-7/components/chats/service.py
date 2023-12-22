@@ -22,9 +22,14 @@ def update_one_by_id(chat_id, chat):
 
     for i, elem in enumerate(db["chats"]):
         if elem["id"] == chat_id:
-
-            elem["name"] = chat["name"]
-            elem["users_id"] = chat["users_id"]
+            try:
+                elem["name"] = chat["name"]
+            except KeyError:
+                pass
+            try:
+                elem["users_id"] = chat["users_id"]
+            except KeyError:
+                pass
 
             json_service.set_database(db)
             return elem
@@ -53,3 +58,18 @@ def create_one(chat):
     db["chats"].append({"id": last_chat_id + 1, **chat})
 
     json_service.set_database(db)
+
+
+def add_users_to_chat(users, chats): # добавляем пользователей в чаты
+    for i in chat.get_all():
+        for c in range(len(chats)):
+            if i["id"] == chats[c]:
+                i["users_id"].extend(users)
+                chat.update_one_by_id(chats[c], {"users_id": i["users_id"]})
+
+
+def add_chats_to_user(who_id, chats): # добавляем чаты в карточку пользователя
+    for i in user.get_all():
+        if i["id"] == who_id:
+            i["chats_id"].extend(chats)
+            user.update_one_by_id(who_id, {"chats_id": i["chats_id"]})
