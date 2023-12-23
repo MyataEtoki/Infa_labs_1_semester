@@ -104,3 +104,20 @@ def change_groups_in_users(groups, users):  # изменяем группы по
                 if users[d] in t["users_id"]:
                     t["users_id"].remove(users[d])
                     update_one_by_id(t["id"], {"users_id": t["users_id"]})  # удалили пользователей из прошлых групп
+
+def check_id_for_add(who_id):
+    ids = []
+    ans =[]
+    for i in get_all():
+        ids.append(i["id"])
+    for c in range(len(who_id)):
+        if who_id[c] in ids:
+            ans.append(True)
+        else:
+            ans.append(False)
+    if all(ans) == True:
+        print("Id существуют")
+        return True
+    else:
+        print('Какого-то Id не существует, попробуйте снова')
+        return False

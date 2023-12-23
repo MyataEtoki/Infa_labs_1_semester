@@ -114,3 +114,20 @@ def who_dont_have_district():
             some_users.append(t["id"])
     if some_users != []:
         print('Теперь у некоторых пользователей -', some_users, 'нет района :(')
+
+def check_id_for_add(who_id):
+    ids = []
+    ans =[]
+    for i in get_all():
+        ids.append(i["id"])
+    for c in range(len(who_id)):
+        if who_id[c] in ids:
+            ans.append(True)
+        else:
+            ans.append(False)
+    if all(ans) == True:
+        print("Id существуют")
+        return True
+    else:
+        print('Какого-то Id не существует, попробуйте снова')
+        return False

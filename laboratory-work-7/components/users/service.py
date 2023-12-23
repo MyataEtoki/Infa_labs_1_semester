@@ -108,3 +108,21 @@ def change_friends_in_users(friends, users):  # изменяем друзей п
                 if users[d] in t["friends_users_id"]:
                     t["friends_users_id"].remove(users[d])
                     update_one_by_id(t["id"], {"friends_users_id": t["friends_users_id"]})  # удалили пользователей у прошлых друзей
+
+
+def check_id_for_add(who_id):
+    ids = []
+    ans =[]
+    for i in get_all():
+        ids.append(i["id"])
+    for c in range(len(who_id)):
+        if who_id[c] in ids:
+            ans.append(True)
+        else:
+            ans.append(False)
+    if all(ans) == True:
+        print("Id существуют")
+        return True
+    else:
+        print('Какого-то Id не существует, попробуйте снова')
+        return False

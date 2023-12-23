@@ -3,6 +3,8 @@ import components.groups.service as group
 import components.chats.service as chat
 import components.districts.service as districts  # без s не работает (???)
 
+
+
 def menu():
     operation = input('Выберите операцию: create, update, read, delete\n')
     match operation:
@@ -11,17 +13,29 @@ def menu():
             object = input('Выберите объект: user, chat, group, district\n')
             match object:
                 case 'user':
+                    check = False
                     name = input('Имя:\n')
                     print('Существующие районы:', districts.get_all())
-                    district = int(input('Id района:\n'))
+                    while check == False:
+                        district = int(input('Id района:\n'))
+                        check = districts.check_id_for_add([district])
+                    check = False
                     email = input('Email:\n')
                     phone = input('Телефон:\n')
                     print('Существующие чаты:', chat.get_all())
-                    chats = [int(x) for x in input('Id чатов в которых состоит, через пробел:\n').split()]
+                    while check==False:
+                        chats = [int(x) for x in input('Id чатов в которых состоит, через пробел:\n').split()]
+                        check = chat.check_id_for_add(chats)
+                    check = False
                     print('Существующие группы:', group.get_all())
-                    groups = [int(x) for x in input('Id групп, в которых состоит, через пробел:\n').split()]
+                    while check==False:
+                        groups = [int(x) for x in input('Id групп, в которых состоит, через пробел:\n').split()]
+                        check = group.check_id_for_add(groups)
+                    check = False
                     print('Существующие пользователи:', user.get_all())
-                    friends = [int(x) for x in input('Id друзей через пробел: \n').split()]
+                    while check==False:
+                        friends = [int(x) for x in input('Id друзей через пробел: \n').split()]
+                        check = user.check_id_for_add(friends)
                     new = {"name": name, "contacts": {"email": email,
                                                       "phone": phone}, "chats_id": chats, "district_id": district,
                            "friends_users_id": friends, "groups_id": groups}
