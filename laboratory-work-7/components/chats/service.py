@@ -1,4 +1,5 @@
 import utils.json_service as json_service
+import components.users.service as user
 
 
 def get_one_by_id(chat_id):
@@ -42,7 +43,6 @@ def delete_one_by_id(chat_id):
 
     for i, elem in enumerate(db["chats"]):
         if elem["id"] == chat_id:
-
             candidate = db["chats"].pop(i)
             json_service.set_database(db)
 
@@ -60,16 +60,46 @@ def create_one(chat):
     json_service.set_database(db)
 
 
-def add_users_to_chat(users, chats): # добавляем пользователей в чаты
-    for i in chat.get_all():
+def add_users_to_chats(users, chats):  # добавляем пользователей в чаты - когда создаём пользователя
+    for i in get_all():
         for c in range(len(chats)):
             if i["id"] == chats[c]:
                 i["users_id"].extend(users)
-                chat.update_one_by_id(chats[c], {"users_id": i["users_id"]})
+                update_one_by_id(chats[c], {"users_id": i["users_id"]})
 
-
-def add_chats_to_user(who_id, chats): # добавляем чаты в карточку пользователя
+def add_chat_to_users(users, chat):  # добавляем чат в карточки пользователей - когда создаём чат
     for i in user.get_all():
-        if i["id"] == who_id:
-            i["chats_id"].extend(chats)
-            user.update_one_by_id(who_id, {"chats_id": i["chats_id"]})
+        for c in range(len(users)):
+            if i["id"] == users[c]:
+                i["chats_id"].append(chat)
+                user.update_one_by_id(users[c], {"chats_id": i["chats_id"]})
+
+def del_user_from_chats(id_user): # когда удаляем пользователя
+    for i in get_all():
+        if id_user in i["users_id"]:
+            i["users_id"].remove(id_user)
+            update_one_by_id(i["id"], {"users_id": i["users_id"]})
+
+
+def del_chat_from_users(id_chat): # когда удаляем чат
+    for i in user.get_all():
+        if id_chat in i["chats_id"]:
+            i["chats_id"].remove(id_chat)
+            user.update_one_by_id(i["id"], {"chats_id": i["chats_id"]})
+
+def found_id(name):
+    for i in get_all():
+        if i["name"] == name:
+            return i["id"]
+
+def change_chats_in_users(chats, users):  # изменяем чаты пользователям
+    for i in user.get_all():
+        for c in range(len(users)):
+            if i["id"] == users[c]:
+                user.update_one_by_id(users[c], {"chats_id": chats})  # у пользователей новые чаты
+    for t in get_all():
+        if t["id"] not in chats:
+            for d in range(len(users)):
+                if users[d] in t["users_id"]:
+                    t["users_id"].remove(users[d])
+                    update_one_by_id(t["id"], {"users_id": t["users_id"]})  # удалили пользователей из прошлых чатов

@@ -83,30 +83,6 @@
       "groups_id": [
         2
       ]
-    },
-    {
-      "id": 6,
-      "name": "Тест Тест",
-      "contacts": {
-        "email": "тест@example.com",
-        "phone": "+333333"
-      },
-      "chats_id": [
-        1,
-        2
-      ]
-    },
-    {
-      "id": 7,
-      "name": "testovich testov",
-      "contacts": {
-        "email": "",
-        "phone": ""
-      },
-      "chats_id": [],
-      "districts_id": 1,
-      "friends_users_id": [],
-      "groups": []
     }
   ],
   "groups": [
@@ -197,11 +173,6 @@
     {
       "id": 3,
       "name": "Нетакуси",
-      "users_id": []
-    },
-    {
-      "id": 4,
-      "name": "testoviy test",
       "users_id": []
     }
   ]
