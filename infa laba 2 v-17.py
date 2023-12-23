@@ -1,5 +1,6 @@
 number_input = False
 answer = ''
+number = 0
 while number_input == False:
     B = input('Введите число: ')
     try:
@@ -15,11 +16,15 @@ if number >= 0:
         number = number // 8
     print('Ваше число в восьмеричной СС:', answer)
 else:
-    complement = bin(number & 0xffffffff)[2:]
-    # Добавляем нули в начало до достижения длины кратной 3
-    complement = complement.zfill((len(complement) + 2) // 3 * 3)
-    # Группируем биты по три и переводим их в восьмеричную систему
-    octal_digits = [complement[i:i+3] for i in range(0, len(complement), 3)]
-    octal = ''.join(str(int(group, 2)) for group in octal_digits)
-
-    print('Ваше число в восьмеричной СС:', octal)
+    ans = bin(number+(1<<8))[2:]
+    # dop_code = bin(abs(number))[2:]
+    # obr_code = ''
+    # mask = (1 << 32) - 1
+    # for i in range(len(dop_code)):
+    #     if dop_code[i] == '0':
+    #         obr_code += '1'
+    #     else:
+    #         obr_code += '0'
+    # print(obr_code, dop_code)
+    print(ans)
+    # print('Ваше число в восьмеричной СС:', ans)

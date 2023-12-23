@@ -62,11 +62,12 @@ def menu():
         case 'update':
             object = input('Выберите объект: user, chat, group, district\n')
             match object:
-                case 'user':  # можно сделать выбор-цикл типа - чё хошь изменить - это - изменяешь - че хош изменить -... - ничего - конец цикла.
+                case 'user':
                     print('Существующие пользователи:', user.get_all())
                     who_id = int(input('Введите id объекта:\n'))
                     while True:
-                        choice = input('Что вы хотите изменить: name, contacts, chats, groups, district, friends ?\nНапишите "end", чтобы завершить\n')
+                        choice = input('Что вы хотите изменить: name, contacts, chats, groups, district, friends ?\n'
+                                       'Напишите "end", чтобы завершить\n')
                         match choice:
                             case 'name':
                                 name = input('Имя:\n')
@@ -188,13 +189,6 @@ def menu():
                     user.del_user_from_friends(who_id)
                     print('Успешно удалено: ', user.delete_one_by_id(who_id))
 
-                    # когда тут удаляешь пользователя - он удаляется из остальных сущностей
-                    '''
-                    считываем айдишник удал объекта и его тип - ищем в других сущностях запись этого объекта
-                    и проверяем есть ли там наш удалённый (пой айди)
-                    если есть - удаляем от туда (заменяем на пустоту)
-                    '''
-                    # с обновлением и добавлением объекта таже тема --> нужна отдельная функция-связка-курьер-почтальон
 
                 case 'chat':
                     print('Существующие чаты:', chat.get_all())
