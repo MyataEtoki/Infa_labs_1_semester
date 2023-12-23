@@ -207,6 +207,7 @@ def menu():
                     group.del_group_from_users(who_id)
                     print('Успешно удалено: ', group.delete_one_by_id(who_id))
                 case 'district':
+                    print('Существующие районы:', districts.get_all())
                     who_id = int(input('id удаляемого объекта:\n'))
                     districts.del_district_from_users(who_id)
                     districts.who_dont_have_district()
