@@ -102,10 +102,15 @@ def del_user_from_district(id_user):  # удаляем пользователя 
             update_one_by_id(i["id"], {"users_id": i["users_id"]})
 
 
-def del_district_from_users(id_distr):  # удаляем район (лучше не надо)
-    some_users = []
+def del_district_from_users(id_distr): # удаляем район (лучше не надо)
     for i in user.get_all():
         if i["district_id"] == id_distr:
-            some_users.append(i["id"])
             user.update_one_by_id(i["id"], {"district_id": 'None'})
-    print('Теперь у некоторых пользователей -', some_users, 'нет района :(')
+
+def who_dont_have_district():
+    some_users = []
+    for t in user.get_all():
+        if t["district_id"] == "None":
+            some_users.append(t["id"])
+    if some_users != []:
+        print('Теперь у некоторых пользователей -', some_users, 'нет района :(')

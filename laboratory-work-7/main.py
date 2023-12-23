@@ -97,8 +97,6 @@ def menu():
                                 user.add_user_to_friends(who_id, friends)
                             case 'end':
                                 break
-                            # new = {"name": name, "contacts": {"email": email, "phone": phone}, "chats_id": chats,
-                            #        "districts_id": district, "friends_users_id": friends, "groups_id": groups}
 
                 case 'chat':
                     print(chat.get_all())
@@ -110,8 +108,10 @@ def menu():
                                 name = input('Название:\n')
                                 print(chat.update_one_by_id(who_id, {"name": name}))
                             case 'users_id':
-                                users_id = input('Id пользователей через пробел: \n').split()
+                                users_id = [int(x) for x in input('Id пользователей через пробел: \n').split()]
                                 print(chat.update_one_by_id(who_id, {"users_id": users_id}))
+                                chat.del_chat_from_users(who_id)
+                                chat.add_chat_to_users(users_id, who_id)
                             case 'end':
                                 break
 
@@ -125,8 +125,10 @@ def menu():
                                 name = input('Название:\n')
                                 print(group.update_one_by_id(who_id, {"name": name}))
                             case 'users_id':
-                                users_id = input('Id пользователей через пробел: \n').split()
+                                users_id = [int(x) for x in input('Id пользователей через пробел: \n').split()]
                                 print(group.update_one_by_id(who_id, {"users_id": users_id}))
+                                group.del_group_from_users(who_id)
+                                group.add_group_to_users(users_id, who_id)
                             case 'end':
                                 break
                 case 'district':
@@ -139,8 +141,11 @@ def menu():
                                 name = input('Название:\n')
                                 print(districts.update_one_by_id(who_id, {"name": name}))
                             case 'users_id':
-                                users_id = input('Id пользователей через пробел: \n').split()
-                                print(districts.update_one_by_id(who_id, {"name": {"users_id": users_id}}))
+                                users_id = [int(x) for x in input('Id пользователей через пробел: \n').split()]
+                                print(districts.update_one_by_id(who_id, {"users_id": users_id}))
+                                districts.del_district_from_users(who_id)
+                                districts.change_district_in_users(who_id, users_id)
+                                districts.who_dont_have_district()
                             case 'end':
                                 break
         # ЧТЕНИЕ
@@ -188,6 +193,7 @@ def menu():
                 case 'district':
                     who_id = int(input('id удаляемого объекта:\n'))
                     districts.del_district_from_users(who_id)
+                    districts.who_dont_have_district()
                     print('Успешно удалено: ', districts.delete_one_by_id(who_id))
 
 
