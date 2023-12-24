@@ -126,7 +126,7 @@ def check_id_for_add(who_id):
         else:
             ans.append(False)
     if all(ans) == True:
-        print("Id существуют")
+        print("Найдено!")
         return True
     else:
         print('Какого-то Id не существует, попробуйте снова')
