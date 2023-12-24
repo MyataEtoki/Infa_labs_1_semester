@@ -4,16 +4,15 @@ import components.chats.service as chat
 import components.districts.service as districts  # без s не работает (???)
 
 
-
 def menu():
     operation = input('Выберите операцию: create, update, read, delete\n')
+    check = False
     match operation:
         # СОЗДАНИЕ
         case 'create':
             object = input('Выберите объект: user, chat, group, district\n')
             match object:
                 case 'user':
-                    check = False
                     name = input('Имя:\n')
                     print('Существующие районы:', districts.get_all())
                     while check == False:
@@ -23,17 +22,17 @@ def menu():
                     email = input('Email:\n')
                     phone = input('Телефон:\n')
                     print('Существующие чаты:', chat.get_all())
-                    while check==False:
+                    while check == False:
                         chats = [int(x) for x in input('Id чатов в которых состоит, через пробел:\n').split()]
                         check = chat.check_id_for_add(chats)
                     check = False
                     print('Существующие группы:', group.get_all())
-                    while check==False:
+                    while check == False:
                         groups = [int(x) for x in input('Id групп, в которых состоит, через пробел:\n').split()]
                         check = group.check_id_for_add(groups)
                     check = False
                     print('Существующие пользователи:', user.get_all())
-                    while check==False:
+                    while check == False:
                         friends = [int(x) for x in input('Id друзей через пробел: \n').split()]
                         check = user.check_id_for_add(friends)
                     new = {"name": name, "contacts": {"email": email,
@@ -50,7 +49,9 @@ def menu():
                 case 'group':
                     name = input('Название:\n')
                     print('Существующие пользователи:', user.get_all())
-                    users_id = [int(x) for x in input('Id пользователей через пробел: \n').split()]
+                    while check == False:
+                        users_id = [int(x) for x in input('Id пользователей через пробел: \n').split()]
+                        check = user.check_id_for_add(users_id)
                     new = {"name": name, "users_id": users_id}
                     print(group.create_one(new))
                     print('Успешно создано: ', group.get_one_by_id(group.found_id(name)))
@@ -58,7 +59,9 @@ def menu():
                 case 'district':
                     name = input('Название:\n')
                     print('Существующие пользователи:', user.get_all())
-                    users_id = [int(x) for x in input('Id пользователей через пробел: \n').split()]
+                    while check == False:
+                        users_id = [int(x) for x in input('Id пользователей через пробел: \n').split()]
+                        check = user.check_id_for_add(users_id)
                     new = {"name": name, "users_id": users_id}
                     print(districts.create_one(new))
                     print('Успешно создано: ', districts.get_one_by_id(districts.found_id(name)))
@@ -67,7 +70,9 @@ def menu():
                 case 'chat':
                     name = input('Название:\n')
                     print('Существующие пользователи:', user.get_all())
-                    users_id = [int(x) for x in input('Id пользователей через пробел: \n').split()]
+                    while check == False:
+                        users_id = [int(x) for x in input('Id пользователей через пробел: \n').split()]
+                        check = user.check_id_for_add(users_id)
                     new = {"name": name, "users_id": users_id}
                     print(chat.create_one(new))
                     print('Успешно создано: ', chat.get_one_by_id(chat.found_id(name)))
@@ -75,36 +80,51 @@ def menu():
         # ОБНОВЛЕНИЕ
         case 'update':
             object = input('Выберите объект: user, chat, group, district\n')
+            check = False
             match object:
                 case 'user':
                     print('Существующие пользователи:', user.get_all())
-                    who_id = int(input('Введите id объекта:\n'))
+                    while check == False:
+                        who_id = int(input('Введите id объекта:\n'))
+                        check = user.check_id_for_add(who_id)
+                    check = False
                     while True:
                         choice = input('Что вы хотите изменить: name, contacts, chats, groups, district, friends ?\n'
                                        'Напишите "end", чтобы завершить\n')
                         match choice:
                             case 'name':
                                 name = input('Имя:\n')
-                                print(user.update_one_by_id(who_id, {"name" : name}))
+                                print(user.update_one_by_id(who_id, {"name": name}))
                             case 'contacts':
                                 email = input('Email:\n')
                                 phone = input('Телефон:\n')
                                 print(user.update_one_by_id(who_id, {"contacts": {"email": email, "phone": phone}}))
                             case 'chats':
                                 print('Существующие чаты:', chat.get_all())
-                                chats = [int(x) for x in input('Id чатов в которых состоит, через пробел:\n').split()]
+                                while check == False:
+                                    chats = [int(x) for x in
+                                             input('Id чатов в которых состоит, через пробел:\n').split()]
+                                    check = chat.check_id_for_add(chats)
+                                check = False
                                 print(user.update_one_by_id(who_id, {"chats_id": chats}))
                                 chat.change_chats_in_users(chats, [who_id])
                                 chat.add_users_to_chats([who_id], chats)
                             case 'groups':
                                 print('Существующие группы:', group.get_all())
-                                groups = [int(x) for x in input('Id групп, в которых состоит, через пробел:\n').split()]
+                                while check == False:
+                                    groups = [int(x) for x in
+                                              input('Id групп, в которых состоит, через пробел:\n').split()]
+                                    check = group.check_id_for_add(groups)
+                                check = False
                                 print(user.update_one_by_id(who_id, {"groups_id": groups}))
-                                group.change_groups_in_users(groups, [who_id]) #изменяет карточку пользователя
-                                group.add_users_to_groups([who_id], groups) # изменяет карточки групп
+                                group.change_groups_in_users(groups, [who_id])  # изменяет карточку пользователя
+                                group.add_users_to_groups([who_id], groups)  # изменяет карточки групп
                             case 'district':
                                 print('Существующие районы:', districts.get_all())
-                                district = int(input('Id района:\n'))
+                                while check == False:
+                                    district = int(input('Id района:\n'))
+                                    check = districts.check_id_for_add([district])
+                                check = False
                                 print(user.update_one_by_id(who_id, {"districts_id": district}))
                                 districts.change_district_in_users(district, [who_id])
                                 districts.add_users_to_district(district, [who_id])
@@ -119,7 +139,10 @@ def menu():
 
                 case 'chat':
                     print('Существующие чаты:', chat.get_all())
-                    who_id = int(input('Введите id объекта:\n'))
+                    while check == False:
+                        who_id = int(input('Введите id объекта:\n'))
+                        check = chat.check_id_for_add(who_id)
+                    check = False
                     while True:
                         choice = input('Что вы хотите изменить: name, users_id ?\nНапишите "end", чтобы завершить\n')
                         match choice:
@@ -128,7 +151,9 @@ def menu():
                                 print(chat.update_one_by_id(who_id, {"name": name}))
                             case 'users_id':
                                 print('Существующие пользователи:', user.get_all())
-                                users_id = [int(x) for x in input('Id пользователей через пробел: \n').split()]
+                                while check == False:
+                                    users_id = [int(x) for x in input('Id пользователей через пробел: \n').split()]
+                                    check = user.check_id_for_add(users_id)
                                 print(chat.update_one_by_id(who_id, {"users_id": users_id}))
                                 chat.del_chat_from_users(who_id)
                                 chat.add_chat_to_users(users_id, who_id)
@@ -137,7 +162,10 @@ def menu():
 
                 case 'group':
                     print('Существующие группы:', group.get_all())
-                    who_id = int(input('Введите id объекта:\n'))
+                    while check == False:
+                        who_id = int(input('Введите id объекта:\n'))
+                        check = group.check_id_for_add(who_id)
+                    check = False
                     while True:
                         choice = input('Что вы хотите изменить: name, users_id ?\nНапишите "end", чтобы завершить\n')
                         match choice:
@@ -146,7 +174,9 @@ def menu():
                                 print(group.update_one_by_id(who_id, {"name": name}))
                             case 'users_id':
                                 print('Существующие пользователи:', user.get_all())
-                                users_id = [int(x) for x in input('Id пользователей через пробел: \n').split()]
+                                while check == False:
+                                    users_id = [int(x) for x in input('Id пользователей через пробел: \n').split()]
+                                    check = user.check_id_for_add(users_id)
                                 print(group.update_one_by_id(who_id, {"users_id": users_id}))
                                 group.del_group_from_users(who_id)
                                 group.add_group_to_users(users_id, who_id)
@@ -154,7 +184,10 @@ def menu():
                                 break
                 case 'district':
                     print('Существующие районы:', districts.get_all())
-                    who_id = int(input('Введите id объекта:\n'))
+                    while check == False:
+                        who_id = int(input('Введите id объекта:\n'))
+                        check = districts.check_id_for_add(who_id)
+                    check = False
                     while True:
                         choice = input('Что вы хотите изменить: name, users_id ?\nНапишите "end", чтобы завершить\n')
                         match choice:
@@ -163,7 +196,9 @@ def menu():
                                 print(districts.update_one_by_id(who_id, {"name": name}))
                             case 'users_id':
                                 print('Существующие пользователи:', user.get_all())
-                                users_id = [int(x) for x in input('Id пользователей через пробел: \n').split()]
+                                while check == False:
+                                    users_id = [int(x) for x in input('Id пользователей через пробел: \n').split()]
+                                    check = user.check_id_for_add(users_id)
                                 print(districts.update_one_by_id(who_id, {"users_id": users_id}))
                                 districts.del_district_from_users(who_id)
                                 districts.change_district_in_users(who_id, users_id)
@@ -173,50 +208,67 @@ def menu():
         # ЧТЕНИЕ
         case 'read':
             object = input('Выберите объект: user, chat, group, district\n')
+            check = False
             match object:
                 case 'user':
                     print('Существующие пользователи:', user.get_all())
-                    who_id = int(input('Введите id объекта:\n'))
+                    while check == False:
+                        who_id = int(input('Введите id объекта:\n'))
+                        check = user.check_id_for_add(who_id)
                     print(user.get_one_by_id(who_id))
                 case 'chat':
                     print('Существующие чаты:', chat.get_all())
-                    who_id = int(input('Введите id объекта:\n'))
+                    while check == False:
+                        who_id = int(input('Введите id объекта:\n'))
+                        check = chat.check_id_for_add(who_id)
                     print(chat.get_one_by_id(who_id))
                 case 'group':
                     print('Существующие группы:', group.get_all())
-                    who_id = int(input('Введите id объекта:\n'))
+                    while check == False:
+                        who_id = int(input('Введите id объекта:\n'))
+                        check = group.check_id_for_add(who_id)
                     print(group.get_one_by_id(who_id))
                 case 'district':
                     print('Существующие районы:', districts.get_all())
-                    who_id = int(input('Введите id объекта:\n'))
+                    while check == False:
+                        who_id = int(input('Введите id объекта:\n'))
+                        check = districts.check_id_for_add(who_id)
                     print(districts.get_one_by_id(who_id))
         # УДАЛЕНИЕ
         case 'delete':
             object = input('Выберите объект: user, chat, group, district\n')
+            check = False
             match object:
                 case 'user':
                     print('Существующие пользователи:', user.get_all())
-                    who_id = int(input('id удаляемого объекта:\n'))
+                    while check == False:
+                        who_id = int(input('Введите id объекта:\n'))
+                        check = user.check_id_for_add(who_id)
                     districts.del_user_from_district(who_id)
                     group.del_user_from_groups(who_id)
                     chat.del_user_from_chats(who_id)
                     user.del_user_from_friends(who_id)
                     print('Успешно удалено: ', user.delete_one_by_id(who_id))
 
-
                 case 'chat':
                     print('Существующие чаты:', chat.get_all())
-                    who_id = int(input('id удаляемого объекта:\n'))
+                    while check == False:
+                        who_id = int(input('Введите id объекта:\n'))
+                        check = chat.check_id_for_add(who_id)
                     chat.del_chat_from_users(who_id)
                     print('Успешно удалено: ', chat.delete_one_by_id(who_id))
                 case 'group':
                     print('Существующие группы:', group.get_all())
-                    who_id = int(input('id удаляемого объекта:\n'))
+                    while check == False:
+                        who_id = int(input('Введите id объекта:\n'))
+                        check = group.check_id_for_add(who_id)
                     group.del_group_from_users(who_id)
                     print('Успешно удалено: ', group.delete_one_by_id(who_id))
                 case 'district':
                     print('Существующие районы:', districts.get_all())
-                    who_id = int(input('id удаляемого объекта:\n'))
+                    while check == False:
+                        who_id = int(input('Введите id объекта:\n'))
+                        check = districts.check_id_for_add(who_id)
                     districts.del_district_from_users(who_id)
                     districts.who_dont_have_district()
                     print('Успешно удалено: ', districts.delete_one_by_id(who_id))
